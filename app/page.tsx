@@ -9,6 +9,7 @@ export default function Home() {
 
     <main className="min-h-screen bg-black text-white p-10">
 
+
       <h1 className="text-5xl font-bold">
         TennisQuant 🎾
       </h1>
@@ -27,111 +28,217 @@ export default function Home() {
 
 
           const prediction = calculatePrediction(
+
             match.elo.player1,
+
             match.elo.player2,
+
             match.momentum.player1,
+
             match.momentum.player2,
+
             match.fatigue.player1,
-            match.fatigue.player2
+
+            match.fatigue.player2,
+
+            1,
+
+            1
+
           );
+
 
 
           const mpriPlayer1 = calculateMPRI(
+
             match.momentum.player1,
+
             match.fatigue.player1,
+
             80,
+
             30,
+
             75
+
           );
+
 
 
           const mpriPlayer2 = calculateMPRI(
+
             match.momentum.player2,
+
             match.fatigue.player2,
+
             80,
+
             30,
+
             75
+
           );
+
 
 
 
           return (
 
+
             <div
+
               key={match.id}
+
               className="rounded-2xl bg-gray-900 p-8"
+
             >
 
 
+
               <h2 className="text-3xl font-bold">
+
                 {match.player1}
+
                 {" vs "}
+
                 {match.player2}
+
               </h2>
 
 
+
               <p className="text-gray-400 mt-2">
-                {match.tournament} • {match.surface}
+
+                {match.tournament}
+
+                {" • "}
+
+                {match.surface}
+
               </p>
+
 
 
 
               <div className="mt-6 space-y-3">
 
 
+
                 <p>
+
                   Prediction:
+
                   <span className="font-bold ml-2">
+
                     {match.prediction}
+
                   </span>
+
                 </p>
+
+
+
 
 
                 <p>
+
                   AI Win Probability:
+
                 </p>
+
+
 
 
                 <p className="text-2xl font-bold">
+
+
                   {prediction.playerA}%
+
                   {" - "}
+
                   {prediction.playerB}%
+
+
                 </p>
 
 
 
+
+
                 <p>
+
                   Confidence:
+
                   {" "}
+
                   {prediction.confidence}%
+
                 </p>
 
 
 
+
+
                 <p>
+
                   Fatigue:
+
                   {" "}
+
                   {match.fatigue.player1}
+
                   {" - "}
+
                   {match.fatigue.player2}
+
                 </p>
+
+
 
 
 
                 <p>
+
                   MPRI:
+
                   {" "}
+
                   {mpriPlayer1}
+
                   {" - "}
+
                   {mpriPlayer2}
+
                 </p>
+
+
+
+
+
+                <p>
+
+                  Stress:
+
+                  {" "}
+
+                  {prediction.stressA}
+
+                  {" - "}
+
+                  {prediction.stressB}
+
+                </p>
+
+
 
 
               </div>
 
 
 
+
             </div>
+
 
           );
 
@@ -139,7 +246,9 @@ export default function Home() {
         })}
 
 
+
       </div>
+
 
 
     </main>

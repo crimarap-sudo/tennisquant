@@ -1,19 +1,25 @@
 import { calculateElo } from "./eloEngine";
+import { calculateStress } from "./stressEngine";
 
 
 export function calculatePrediction(
-  eloA: number,
-  eloB: number,
-  formA: number,
-  formB: number
-) {
+  eloA:number,
+  eloB:number,
+  formA:number,
+  formB:number,
+  fatigueA:number,
+  fatigueB:number,
+  lossesA:number,
+  lossesB:number
+){
 
-  // Apply Elo calculation
+  // Elo calculation
   const eloAUpdated = calculateElo(
     eloA,
     eloB,
     1
   );
+
 
   const eloBUpdated = calculateElo(
     eloB,
@@ -22,19 +28,47 @@ export function calculatePrediction(
   );
 
 
-  // Elo advantage
   const eloDifference =
     eloAUpdated - eloBUpdated;
 
 
-  // Prediction formula
+
+  // Fatigue advantage
+  const fatigueDifference =
+    fatigueB - fatigueA;
+
+
+
+  // Stress calculation
+  const stressA = calculateStress(
+    lossesA,
+    eloB / 10,
+    20
+  );
+
+
+  const stressB = calculateStress(
+    lossesB,
+    eloA / 10,
+    20
+  );
+
+
+  const stressDifference =
+    stressB - stressA;
+
+
+
+  // Final probability
   let probability =
     50 +
     (eloDifference / 15) +
-    ((formA - formB) / 3);
+    ((formA - formB) / 3) +
+    (fatigueDifference / 2) +
+    (stressDifference / 3);
 
 
-  // Keep probability between 5% and 95%
+
   probability = Math.max(
     5,
     Math.min(
@@ -44,7 +78,7 @@ export function calculatePrediction(
   );
 
 
-  // Confidence score
+
   const confidence = Math.min(
     95,
     Math.round(
@@ -54,13 +88,18 @@ export function calculatePrediction(
   );
 
 
+
   return {
 
     playerA: probability,
 
     playerB: 100 - probability,
 
-    confidence
+    confidence,
+
+    stressA,
+
+    stressB
 
   };
 
