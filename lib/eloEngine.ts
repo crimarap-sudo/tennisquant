@@ -24,7 +24,6 @@ export function calculateElo(
     (result - expected);
 
 
-
   return Math.round(newRating);
 
 }
