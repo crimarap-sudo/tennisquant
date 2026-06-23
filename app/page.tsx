@@ -29,7 +29,9 @@ export default function Home() {
             match.elo.player1,
             match.elo.player2,
             match.momentum.player1,
-            match.momentum.player2
+            match.momentum.player2,
+            match.fatigue.player1,
+            match.fatigue.player2
           );
 
 
@@ -82,6 +84,15 @@ export default function Home() {
                   Confidence:
                   {" "}
                   {prediction.confidence}%
+                </p>
+
+
+                <p>
+                  Fatigue:
+                  {" "}
+                  {match.fatigue.player1}
+                  {" - "}
+                  {match.fatigue.player2}
                 </p>
 
 
