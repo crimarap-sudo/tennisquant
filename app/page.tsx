@@ -30,20 +30,16 @@ export default function Home() {
           const prediction = calculatePrediction(
 
             match.elo.player1,
-
             match.elo.player2,
 
             match.momentum.player1,
-
             match.momentum.player2,
 
             match.fatigue.player1,
-
             match.fatigue.player2,
 
-            1,
-
-            1
+            match.losses.player1,
+            match.losses.player2
 
           );
 
@@ -55,7 +51,7 @@ export default function Home() {
 
             match.fatigue.player1,
 
-            80,
+            match.surfaceAdaptation.player1,
 
             30,
 
@@ -71,14 +67,13 @@ export default function Home() {
 
             match.fatigue.player2,
 
-            80,
+            match.surfaceAdaptation.player2,
 
             30,
 
             75
 
           );
-
 
 
 
@@ -107,6 +102,7 @@ export default function Home() {
 
 
 
+
               <p className="text-gray-400 mt-2">
 
                 {match.tournament}
@@ -120,7 +116,10 @@ export default function Home() {
 
 
 
+
               <div className="mt-6 space-y-3">
+
+
 
 
 
@@ -149,15 +148,14 @@ export default function Home() {
 
 
 
-                <p className="text-2xl font-bold">
 
+                <p className="text-2xl font-bold">
 
                   {prediction.playerA}%
 
                   {" - "}
 
                   {prediction.playerB}%
-
 
                 </p>
 
@@ -228,6 +226,7 @@ export default function Home() {
                   {prediction.stressB}
 
                 </p>
+
 
 
 

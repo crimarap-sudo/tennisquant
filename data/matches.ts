@@ -8,16 +8,6 @@ export const matches = [
 
     prediction: "Carlos Alcaraz",
 
-    player1Probability: 62,
-    player2Probability: 38,
-
-    confidence: 78,
-
-    mpri: {
-      player1: 84,
-      player2: 76,
-    },
-
     fatigue: {
       player1: 32,
       player2: 45,
@@ -33,6 +23,16 @@ export const matches = [
       player2: 2080,
     },
 
+    losses: {
+      player1: 1,
+      player2: 2,
+    },
+
+    surfaceAdaptation: {
+      player1: 90,
+      player2: 85,
+    },
+
     valueBet: true,
   },
 
@@ -45,16 +45,6 @@ export const matches = [
     surface: "Hard",
 
     prediction: "Jannik Sinner",
-
-    player1Probability: 65,
-    player2Probability: 35,
-
-    confidence: 82,
-
-    mpri: {
-      player1: 88,
-      player2: 72,
-    },
 
     fatigue: {
       player1: 28,
@@ -71,6 +61,16 @@ export const matches = [
       player2: 2105,
     },
 
+    losses: {
+      player1: 0,
+      player2: 2,
+    },
+
+    surfaceAdaptation: {
+      player1: 92,
+      player2: 82,
+    },
+
     valueBet: true,
   },
 
@@ -83,16 +83,6 @@ export const matches = [
     surface: "Clay",
 
     prediction: "Iga Swiatek",
-
-    player1Probability: 70,
-    player2Probability: 30,
-
-    confidence: 85,
-
-    mpri: {
-      player1: 91,
-      player2: 74,
-    },
 
     fatigue: {
       player1: 25,
@@ -107,6 +97,16 @@ export const matches = [
     elo: {
       player1: 2250,
       player2: 2070,
+    },
+
+    losses: {
+      player1: 0,
+      player2: 3,
+    },
+
+    surfaceAdaptation: {
+      player1: 95,
+      player2: 78,
     },
 
     valueBet: false,
