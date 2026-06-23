@@ -1,3 +1,6 @@
+import { calculateElo } from "./eloEngine";
+
+
 export function calculatePrediction(
   eloA:number,
   eloB:number,
@@ -5,7 +8,22 @@ export function calculatePrediction(
   formB:number
 ){
 
-  const eloDifference = eloA - eloB;
+  const newEloA = calculateElo(
+    eloA,
+    eloB,
+    1
+  );
+
+
+  const newEloB = calculateElo(
+    eloB,
+    eloA,
+    0
+  );
+
+
+  const eloDifference =
+    newEloA - newEloB;
 
 
   let probability =
