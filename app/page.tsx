@@ -1,5 +1,6 @@
 import { matches } from "@/data/matches";
 import { calculatePrediction } from "@/lib/predictionEngine";
+import { calculateMPRI } from "@/lib/mpriEngine";
 
 
 export default function Home() {
@@ -33,6 +34,25 @@ export default function Home() {
             match.fatigue.player1,
             match.fatigue.player2
           );
+
+
+          const mpriPlayer1 = calculateMPRI(
+            match.momentum.player1,
+            match.fatigue.player1,
+            80,
+            30,
+            75
+          );
+
+
+          const mpriPlayer2 = calculateMPRI(
+            match.momentum.player2,
+            match.fatigue.player2,
+            80,
+            30,
+            75
+          );
+
 
 
           return (
@@ -87,12 +107,23 @@ export default function Home() {
                 </p>
 
 
+
                 <p>
                   Fatigue:
                   {" "}
                   {match.fatigue.player1}
                   {" - "}
                   {match.fatigue.player2}
+                </p>
+
+
+
+                <p>
+                  MPRI:
+                  {" "}
+                  {mpriPlayer1}
+                  {" - "}
+                  {mpriPlayer2}
                 </p>
 
 
