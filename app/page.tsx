@@ -1,5 +1,5 @@
 import { matches } from "@/data/matches";
-
+import { calculatePrediction, calculateMPRI } from "@/lib/predictionEngine";
 
 export default function Home() {
 
@@ -22,7 +22,12 @@ export default function Home() {
       <div className="grid gap-6 mt-10">
 
 
-        {matches.map((match)=> (
+        {matches.map((match)=> (const prediction = calculatePrediction(
+match.elo.player1,
+match.elo.player2,
+match.momentum.player1,
+match.momentum.player2
+);
 
 
           <div
@@ -108,9 +113,9 @@ export default function Home() {
 
 
             <p className="text-xl font-bold">
-              {match.player1Probability}% 
+              {prediction.playerA}%
               {" - "}
-              {match.player2Probability}%
+              {prediction.playerB}%
             </p>
 
           </div>
