@@ -1,25 +1,26 @@
 import { calculateElo } from "./eloEngine";
 import { calculateStress } from "./stressEngine";
-
+import { calculateSurfaceAdvantage } from "./surfaceEngine";
 
 export function calculatePrediction(
-  eloA:number,
-  eloB:number,
-  formA:number,
-  formB:number,
-  fatigueA:number,
-  fatigueB:number,
-  lossesA:number,
-  lossesB:number
-){
+  eloA: number,
+  eloB: number,
+  formA: number,
+  formB: number,
+  fatigueA: number,
+  fatigueB: number,
+  lossesA: number,
+  lossesB: number,
+  surfaceA: number,
+  surfaceB: number
+) {
 
-  // Elo calculation
+  // Updated Elo
   const eloAUpdated = calculateElo(
     eloA,
     eloB,
     1
   );
-
 
   const eloBUpdated = calculateElo(
     eloB,
@@ -27,25 +28,19 @@ export function calculatePrediction(
     0
   );
 
-
   const eloDifference =
     eloAUpdated - eloBUpdated;
 
-
-
-  // Fatigue advantage
+  // Fatigue
   const fatigueDifference =
     fatigueB - fatigueA;
 
-
-
-  // Stress calculation
+  // Stress
   const stressA = calculateStress(
     lossesA,
     eloB / 10,
     20
   );
-
 
   const stressB = calculateStress(
     lossesB,
@@ -53,11 +48,15 @@ export function calculatePrediction(
     20
   );
 
-
   const stressDifference =
     stressB - stressA;
 
-
+  // Surface
+  const surfaceAdvantage =
+    calculateSurfaceAdvantage(
+      surfaceA,
+      surfaceB
+    );
 
   // Final probability
   let probability =
@@ -65,9 +64,8 @@ export function calculatePrediction(
     (eloDifference / 15) +
     ((formA - formB) / 3) +
     (fatigueDifference / 2) +
-    (stressDifference / 3);
-
-
+    (stressDifference / 3) +
+    surfaceAdvantage;
 
   probability = Math.max(
     5,
@@ -77,8 +75,6 @@ export function calculatePrediction(
     )
   );
 
-
-
   const confidence = Math.min(
     95,
     Math.round(
@@ -87,20 +83,12 @@ export function calculatePrediction(
     )
   );
 
-
-
   return {
-
     playerA: probability,
-
     playerB: 100 - probability,
-
     confidence,
-
     stressA,
-
-    stressB
-
+    stressB,
+    surfaceAdvantage
   };
-
 }
